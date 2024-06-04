@@ -5,8 +5,10 @@ from paho.mqtt import client as mqtt_client
 
 
 # broker = 'broker.emqx.io'
-broker = 'localhost'
-port = 1883
+# broker = 'localhost'
+broker = "10.96.232.103"
+# port = 1883
+port = 31338
 topic = "python/mqtt"
 # Generate a Client ID with the publish prefix.
 client_id = f'publish-{random.randint(0, 1000)}'
