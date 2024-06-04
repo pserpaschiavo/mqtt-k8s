@@ -2,22 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: mqtt-publisher
-  name: mqtt-publisher
+    app: k8s-mqtt-publisher
+  name: k8s-mqtt-publisher
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mqtt-publisher
+      app: k8s-mqtt-publisher
   strategy: {}
   template:
     metadata:
       labels:
-        app: mqtt-publisher
+        app: k8s-mqtt-publisher
     spec:
       containers:
-      - image: pserpaschiavo/k8s-mqtt-pubsub-emqx:publisher
-        name: k8s-mqtt-pubsub-emqx
+      - image: pserpaschiavo/k8s-mqtt-publisher:1.0
+        name: k8s-mqtt-publisher
+        ports:
+        - containerPort: 1883
         resources:
           requests:
             memory: "64Mi"

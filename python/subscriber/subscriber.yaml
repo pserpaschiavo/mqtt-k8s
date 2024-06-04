@@ -2,22 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: mqtt-subscriber
-  name: mqtt-subscriber
+    app: k8s-mqtt-subscriber
+  name: k8s-mqtt-subscriber
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mqtt-subscriber
-  strategy: {}
+      app: k8s-mqtt-subscriber
   template:
     metadata:
       labels:
-        app: mqtt-subscriber
+        app: k8s-mqtt-subscriber
     spec:
       containers:
-      - image: pserpaschiavo/k8s-mqtt-pubsub-emqx:subscriber
-        name: k8s-mqtt-pubsub-emqx
+      - image: pserpaschiavo/k8s-mqtt-subscriber:1.0
+        name: k8s-mqtt-subscriber
+        ports:
+        - containerPort: 1883
         resources:
           requests:
             memory: "64Mi"
