@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 
 COPY mqtt_sub.py .
 
-CMD [ "sh" ]
+CMD [ "python", "mqtt_sub.py" ]
