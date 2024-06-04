@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mqtt-publisher
+  name: mqtt-publisher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mqtt-publisher
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mqtt-publisher
+    spec:
+      containers:
+      - image: pserpaschiavo/k8s-mqtt-pubsub-emqx:publisher
+        name: k8s-mqtt-pubsub-emqx
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "1Gi"
+            cpu: "1"

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mqtt-subscriber
+  name: mqtt-subscriber
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mqtt-subscriber
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mqtt-subscriber
+    spec:
+      containers:
+      - image: pserpaschiavo/k8s-mqtt-pubsub-emqx:subscriber
+        name: k8s-mqtt-pubsub-emqx
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "1Gi"
+            cpu: "1"
