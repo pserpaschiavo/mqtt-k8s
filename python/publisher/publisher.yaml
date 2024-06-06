@@ -18,6 +18,9 @@ spec:
       containers:
       - image: pserpaschiavo/k8s-mqtt-publisher:1.0
         name: k8s-mqtt-publisher
+        command:
+        - "sleep"
+        - "604800"
         ports:
         - containerPort: 1883
         resources:
