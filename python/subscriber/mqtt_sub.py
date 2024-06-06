@@ -5,9 +5,9 @@ from paho.mqtt import client as mqtt_client
 
 # broker = 'broker.emqx.io'
 # broker = 'localhost'
-broker = "10.96.232.103"
-# port = 1883
-port = 31338
+broker = "10.152.183.126"
+port = 1883
+# port = 31338
 topic = "python/mqtt"
 # Generate a Client ID with the subscribe prefix.
 client_id = f'subscribe-{random.randint(0, 100)}'
