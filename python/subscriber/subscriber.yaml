@@ -20,6 +20,7 @@ spec:
         command:
         - "sleep"
         - "604800"
+        imagePullPolicy: Always
         ports:
         - containerPort: 1883
         resources:
