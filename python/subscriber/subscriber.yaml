@@ -17,9 +17,9 @@ spec:
       containers:
       - image: pserpaschiavo/k8s-mqtt-subscriber:1.0
         name: k8s-mqtt-subscriber
-        command:
-        - "sleep"
-        - "604800"
+        # command:
+        # - "sleep"
+        # - "604800"
         imagePullPolicy: Always
         ports:
         - containerPort: 1883
