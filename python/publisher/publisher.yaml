@@ -18,9 +18,14 @@ spec:
       containers:
       - image: pserpaschiavo/k8s-mqtt-publisher:1.0
         name: k8s-mqtt-publisher
-        # command:
-        # - "sleep"
-        # - "604800"
+        env:
+        - name: CLUSTER_IP
+          value: $(EMQX_SERVICE_PORT_1883_TCP_ADDR)
+        - name: CLUSTER_PORT
+          value: $(EMQX_SERVICE_PORT_1883_TCP_PORT)
+        command:
+        - "sleep"
+        - "604800"
         imagePullPolicy: Always
         ports:
         - containerPort: 1883

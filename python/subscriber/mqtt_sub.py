@@ -6,8 +6,7 @@ from paho.mqtt import client as mqtt_client
 
 # broker = 'broker.emqx.io'
 broker = os.environ["CLUSTER_IP"]
-port = os.environ["CLUSTER_PORT"]
-port = 1883
+port = int(os.environ["CLUSTER_PORT"])
 topic = "python/mqtt"
 
 # Generate a Client ID with the subscribe prefix.
