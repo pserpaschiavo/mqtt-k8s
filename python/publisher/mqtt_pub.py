@@ -1,14 +1,13 @@
 import random
 import time
+import os
 
 from paho.mqtt import client as mqtt_client
 
 
 # broker = 'broker.emqx.io'
-# broker = 'localhost'
-broker = "10.152.183.126"
-port = 1883
-# port = 31338
+broker = os.environ["CLUSTER_IP"]
+port = os.environ["CLUSTER_PORT"]
 topic = "python/mqtt"
 # Generate a Client ID with the publish prefix.
 client_id = f'publish-{random.randint(0, 1000)}'

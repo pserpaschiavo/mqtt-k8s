@@ -1,6 +1,5 @@
 cluster-up:
 	@kind create cluster --config kubernetes/cluster-config/config.yaml
-	@kubectl create namespace mqtt
 	@kubectl create namespace cert-manager
 
 cluster-delete:
