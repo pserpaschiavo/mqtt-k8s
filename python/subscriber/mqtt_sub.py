@@ -4,10 +4,9 @@ import os
 from paho.mqtt import client as mqtt_client
 
 
-# broker = 'broker.emqx.io'
 broker = os.environ["CLUSTER_IP"]
 port = int(os.environ["CLUSTER_PORT"])
-topic = os.environ["TOPIC"]
+topic = "ufes/nerds"
 
 # Generate a Client ID with the subscribe prefix.
 client_id = f'subscribe-{random.randint(0, 100)}'
@@ -31,7 +30,7 @@ def connect_mqtt() -> mqtt_client:
 
 def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
-        print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
+        print(f"Received '{msg.payload.decode()}' from '{msg.topic}' topic")
 
     client.subscribe(topic)
     client.on_message = on_message

@@ -2,25 +2,33 @@ import random
 import string
 import time
 import os
+import argparse
 
 from paho.mqtt import client as mqtt_client
 
-
-# broker = 'broker.emqx.io'
 broker = os.environ["CLUSTER_IP"]
 port = int(os.environ["CLUSTER_PORT"])
 topic = "ufes/nerds"
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-m", "--msg-max", type=int, help="Set the maximum mensages for session.")
+parser.add_argument("-l", "--msg-length", type=int, help="Set the size of sent messages.")
+parser.add_argument("-r", "--msg-time", type=int, help="Set the interval of time for each messages sent (in milisseconds)")
+
+args = parser.parse_args()
+
+msg_max = args.msg_max
+msg_length = args.msg_length
+msg_time = (args.msg_time) / 1000
+
+
 # Generate a Client ID with the publish prefix.
 client_id = f'publish-{random.randint(0, 1000)}'
 # username = 'emqx'
 # password = 'public'
 
-msg_max = int(os.environ["MSG_MAX"])
-msg_length = int(os.environ["MSG_LENGTH"])
-msg_time = int(os.environ["MSG_TIME"]) / 1000
-
-def get_message(length):
-    msg = ''.join(random.choice(string.ascii_letters) for i in range(length))
+def get_message(msg_length):
+    msg = ''.join(random.choice(string.ascii_letters) for i in range(msg_length))
     return msg
 
 def connect_mqtt():
@@ -39,16 +47,17 @@ def connect_mqtt():
 
 def publish(client):
     msg_count = 1
+    msg = get_message(msg_length)
     while True:
         time.sleep(msg_time)
-        msg = f"messages: {msg_count}"
+        status_msg = f"messages {msg_count}: {msg}"
         result = client.publish(topic, msg)
         # result: [0, 1]
         status = result[0]
         if status == 0:
-            print(f"Send `{msg}` to topic `{topic}`")
+            print(f"Send '{status_msg}' to topic '{topic}'")
         else:
-            print(f"Failed to send message to topic {topic}")
+            print(f"Failed to send message to topic '{topic}'")
         msg_count += 1
         if msg_count > msg_max:
             break
